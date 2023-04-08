@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 import pandas as pd
 import numpy as np
@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import io, time, json
 import requests
 from bs4 import BeautifulSoup
-
+from io import BytesIO
+from starlette.responses import StreamingResponse
 
 class Item(BaseModel):
     food1: str
@@ -81,6 +82,59 @@ async def create_item(item: Item):
             print("Error:", response.status_code, response.text)
 
     return totalMacros
+
+
+
+
+
+import base64
+
+@app.post("/picture/")
+async def create_item(item: Item):
+    listoffood = [item.food1,item.food2,item.food3]
+    images = []
+    totalProtein  = 0
+    totalCarbs = 0
+    totalFat = 0
+
+    for i in range(len(listoffood)): 
+        query = listoffood[i]
+        api_url = 'https://api.api-ninjas.com/v1/nutrition?query={}'.format(query)
+        response = requests.get(api_url, headers={'X-Api-Key': 'IiBcsYDnkt70LsAirjY+6w==g1XgUj4Ld8KLhkA3'})
+        if response.status_code == requests.codes.ok:
+            data = json.loads(response.text)
+            size = len(data)
+            for i in range(size):
+                nutrition_data = data[i] 
+                protein = nutrition_data['protein_g']
+                fat = nutrition_data['fat_total_g']
+                carbs = nutrition_data['carbohydrates_total_g']
+                totalProtein = totalProtein + protein
+                totalFat = totalFat + fat
+                totalCarbs = totalCarbs + carbs
+                name = nutrition_data['name']
+
+            labels = ["protein", "carbohydrates", "fat"]
+            listofdata = [totalProtein, totalCarbs, totalFat]
+            plt.pie(listofdata, labels=labels)
+            plt.title(name.upper())
+            
+            # create a buffer to store image data
+            buf = BytesIO()
+            plt.savefig(buf, format="png")
+            buf.seek(0)
+            
+            # encode the image data as base64
+            image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
+            images.append(image_data)
+            
+            plt.clf()
+
+        else:
+            print("Error:", response.status_code, response.text)
+
+    return {"images": images}
+
 
 
 
@@ -169,3 +223,4 @@ async def root():
 
 
 
+# uvicorn main:app --reload
