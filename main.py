@@ -7,16 +7,27 @@ import io, time, json
 import requests
 from bs4 import BeautifulSoup
 from io import BytesIO
+from typing import Optional
+
 from starlette.responses import StreamingResponse
 
 class Item(BaseModel):
     food1: str
-    food2: str
-    food3: str
+    food2: Optional[str] = None
+    food3: Optional[str] = None
+
 
 
 app = FastAPI()
 
+
+# checks for successful connection 
+
+@app.get("/root")
+async def root():
+    return {"message": "Success"}
+
+# returns total amount of calories for all foods entered 
 
 @app.post("/calories/")
 async def create_item(item: Item):
@@ -48,6 +59,7 @@ async def create_item(item: Item):
     return totalCals
 
 
+# returns total amount of macros for all food entered 
 
 @app.post("/macros/")
 async def create_item(item: Item):
@@ -85,7 +97,7 @@ async def create_item(item: Item):
 
 
 
-
+# returns encoded image of data visualization of total macros 
 
 import base64
 
@@ -137,6 +149,7 @@ async def create_item(item: Item):
 
 
 
+# sends all information for arm workouts 
 
 @app.get("/arms")
 async def root():
@@ -153,6 +166,7 @@ async def root():
             "Steps 3" : "Sit on a bench or chair with your feet flat on the floor and your back straight. Hold a dumbbell in one hand with your palm facing up and your elbow resting against the inside of your thigh. Slowly curl the dumbbell up towards your shoulder, keeping your elbow stationary against your thigh and your wrist straight. Exhale as you lift the weight. Pause at the top of the movement and squeeze your bicep muscles. Lower the weight back down to the starting position, inhaling as you do so. Repeat for 8-10 repetitions, then switch to the other arm and repeat the same number of repetitions." 
         }
 
+# sends all information for quad workouts 
 
 @app.get("/quads")
 async def root():
@@ -169,6 +183,7 @@ async def root():
             "Steps 3" : "Sit on a bench or chair with your feet flat on the floor and your back straight. Hold a dumbbell in one hand with your palm facing up and your elbow resting against the inside of your thigh. Slowly curl the dumbbell up towards your shoulder, keeping your elbow stationary against your thigh and your wrist straight. Exhale as you lift the weight. Pause at the top of the movement and squeeze your bicep muscles. Lower the weight back down to the starting position, inhaling as you do so. Repeat for 8-12 repetitions, then switch to the other arm and repeat the same number of repetitions." 
     }
 
+# sends all information for glute workouts 
 
 @app.get("/glutes")
 async def root():
@@ -185,6 +200,9 @@ async def root():
             "Steps 3" : "Adjust the seat of the machine so that your knees are bent at a 90-degree angle when your feet are flat on the platform. Place your feet hip-width apart on the platform, with your toes pointed slightly outward. Grip the handles of the machine and take a deep breath. Push the platform away from you, straightening your legs without locking your knees. Exhale as you push the platform away. Slowly lower the platform back down towards you, bending your knees to a 90-degree angle. Inhale as you lower the platform. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form." 
 
         }
+
+
+# sends all information for chest workouts 
 
 @app.get("/chest")
 async def root():
@@ -203,6 +221,7 @@ async def root():
         }
 
 
+# sends all information for back workouts 
 
 @app.get("/back")
 async def root():
@@ -221,6 +240,20 @@ async def root():
             "Steps 3" : "Stand with your feet shoulder-width apart and hold a dumbbell in each hand with your palms facing each other. Hinge forward at your hips, keeping your back flat and your core engaged. Lift your arms out to the sides, squeezing your shoulder blades together as you do so. Keep your elbows slightly bent and your palms facing the ground throughout the exercise. Hold the top position for a second, then slowly lower the dumbbells back down to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form." 
         }
 
+# send all information for hamstring workouts 
 
+@app.get("/hamstrings")
+async def root():
+    return {
+        "Exercise 1 Name": "Romanian Deadlift",
+        "YouTube 1": "https://www.youtube.com/watch?v=_oyxCn2iSjU&t=25s",
+        "Steps 1": "Start with your feet shoulder-width apart and your knees slightly bent. Hold a barbell with an overhand grip and let it rest on the front of your thighs. Keep your back straight and your core engaged as you hinge forward at the hips, lowering the bar down the front of your legs. Go as low as you can while maintaining a flat back and keeping the bar close to your legs. Pause at the bottom of the movement, then use your hamstrings and glutes to lift the bar back up to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form.",
 
-# uvicorn main:app --reload
+        "Exercise 2 Name": "Lying Leg Curl",
+        "YouTube 2": "https://www.youtube.com/watch?v=6y_GEg3YFC0",
+        "Steps 2": "Lie face down on a leg curl machine with your knees just off the edge of the bench and your ankles hooked under the padded bar. Grasp the handles of the machine for stability. Keep your hips and legs in contact with the bench throughout the exercise. Use your hamstrings to pull the padded bar towards your buttocks, keeping your toes pointed towards the ground. Pause briefly at the top of the movement, then slowly lower the padded bar back down to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form.",
+
+        "Exercise 3 Name": "Seated Leg Curl",
+        "YouTube 3" : "https://www.youtube.com/watch?v=oFxEDkppbSQ",
+        "Steps 3" : "Start by sitting at a leg curl machine and adjusting the weight. Hook your ankles under the padded lever, and grasp the handles of the machine. Engage your core muscles and curl your legs towards your buttocks, squeezing your hamstrings at the top of the movement. Pause briefly, then slowly lower the weight back down to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form." 
+    }
