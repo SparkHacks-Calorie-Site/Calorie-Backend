@@ -139,7 +139,7 @@ async def create_item(item: Item):
                 totalProtein = totalProtein + protein
                 totalFat = totalFat + fat
                 totalCarbs = totalCarbs + carbs
-                name = nutrition_data['name']
+                name = "TOTAL MACROS"
 
             labels = ["protein", "carbohydrates", "fat"]
             listofdata = [totalProtein, totalCarbs, totalFat]
@@ -160,7 +160,7 @@ async def create_item(item: Item):
         else:
             print("Error:", response.status_code, response.text)
 
-    return {"images": images}
+    return {"images": image_data}
 
 
 
