@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from io import BytesIO
 from typing import Optional
-
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import StreamingResponse
 
 class Item(BaseModel):
@@ -19,6 +19,21 @@ class Item(BaseModel):
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # checks for successful connection 
