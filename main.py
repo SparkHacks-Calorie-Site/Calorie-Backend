@@ -223,7 +223,23 @@ async def root():
 
 # sends all information for back workouts 
 
-@app.get("/back")
+@app.get("/upper-back")
+async def root():
+    return {
+        "Exercise 1 Name": "Dumbbell Shrugs",
+        "YouTube 1": "https://www.youtube.com/watch?v=cJRVVxmytaM",
+        "Steps 1": "Stand up straight with a dumbbell in each hand, palms facing your sides. Lift your shoulders up towards your ears, hold for a second, and then lower them back down. Repeat for the desired number of repetitions.",
+
+        "Exercise 2 Name": "T-Bar Rows",
+        "YouTube 2": "https://www.youtube.com/watch?v=j3Igk5nyZE4",
+        "Steps 2": "Load a T-bar row machine with the desired weight. Straddle the bar with your legs, and grip the handles with an overhand grip. Stand up straight with your arms extended, and then pull the handles towards your chest, squeezing your shoulder blades together. Hold for a second, then lower the weight back down to the starting position. Repeat for the desired number of repetitions.",
+
+        "Exercise 3 Name": "Face Pulls",
+        "YouTube 3": "https://www.youtube.com/watch?v=rep-qVOkqgk",
+        "Steps 3": "Attach a rope handle to a cable machine at about chest height. Stand facing the machine and grasp the handle with an overhand grip. Step back to create tension in the cable. Keeping your upper arms parallel to the ground, pull the handle towards your face, separating your hands as you do so. Your elbows should be high and to the sides, and your hands should end up at about ear level. Hold for a second, then slowly release the weight back to the starting position. Repeat for the desired number of repetitions."
+    }
+
+@app.get("/Lats")
 async def root():
     return {"Exercise 1 Name": "Lat Pulldown",
             "YouTube 1" : "https://www.youtube.com/watch?v=CAwf7n6Luuc",
@@ -235,9 +251,10 @@ async def root():
             "Steps 2" : "Stand with your feet shoulder-width apart and hold a dumbbell in each hand. Bend forward at the waist while keeping your back straight, and let your arms hang straight down towards the floor. Your palms should be facing each other, and your elbows should be close to your sides. Keeping your back straight and your core engaged, pull the dumbbells up towards your chest by bending your elbows and squeezing your shoulder blades together. Keep your elbows close to your sides throughout the movement. Pause at the top of the movement for a moment, then slowly lower the dumbbells back down to the starting position. Repeat the movement for the desired number of repetitions.", 
 
 
-            "Exercise 3 Name": "Bent Over Reverese Fly",
-            "YouTube 3" : "https://www.youtube.com/watch?v=ttvfGg9d76c",
-            "Steps 3" : "Stand with your feet shoulder-width apart and hold a dumbbell in each hand with your palms facing each other. Hinge forward at your hips, keeping your back flat and your core engaged. Lift your arms out to the sides, squeezing your shoulder blades together as you do so. Keep your elbows slightly bent and your palms facing the ground throughout the exercise. Hold the top position for a second, then slowly lower the dumbbells back down to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form." 
+            "Exercise 3 Name": "Seated Cable Rows",
+            "YouTube 3" : "https://www.youtube.com/watch?v=GZbfZ033f74",
+            "Steps 3" : "Sit at a cable row machine with your feet firmly planted on the platform and your knees slightly bent. Grasp the handle with an overhand grip and sit up straight, with your shoulders back and your chest out. Pull the handle towards your abdomen, keeping your elbows close to your sides and squeezing your shoulder blades together. Pause briefly at the top of the movement, then slowly release the handle back to the starting position, with your arms fully extended. Repeat the movement for a total of 8-12 repetitions or as many as you can comfortably perform with good form." 
+
         }
 
 # send all information for hamstring workouts 
@@ -256,4 +273,20 @@ async def root():
         "Exercise 3 Name": "Seated Leg Curl",
         "YouTube 3" : "https://www.youtube.com/watch?v=oFxEDkppbSQ",
         "Steps 3" : "Start by sitting at a leg curl machine and adjusting the weight. Hook your ankles under the padded lever, and grasp the handles of the machine. Engage your core muscles and curl your legs towards your buttocks, squeezing your hamstrings at the top of the movement. Pause briefly, then slowly lower the weight back down to the starting position. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form." 
+    }
+
+@app.get("/abs")
+async def root():
+    return {
+        "Exercise 1 Name": "Crunches",
+        "YouTube 1": "https://www.youtube.com/watch?v=Xyd_fa5zoEU",
+        "Steps 1": "Lie flat on your back with your knees bent and your feet flat on the floor. Place your hands behind your head, but do not pull on your neck. Curl your shoulders towards your pelvis using only your abdominal muscles, while keeping your neck and head in a neutral position. Exhale as you lift and inhale as you lower. Repeat for 8-12 repetitions or as many as you can comfortably perform with good form.",
+
+        "Exercise 2 Name": "Plank",
+        "YouTube 2": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+        "Steps 2": "Start in a push-up position, with your elbows on the ground instead of your hands. Your elbows should be directly under your shoulders. Engage your core muscles and lift your body off the ground, so that only your forearms and toes are touching the ground. Keep your body in a straight line from head to heels. Hold the position for 30-60 seconds or as long as you can comfortably maintain good form.",
+
+        "Exercise 3 Name": "Russian Twist",
+        "YouTube 3" : "https://www.youtube.com/watch?v=wkD8rjkodUI",
+        "Steps 3" : "Sit on the floor with your knees bent and your feet flat on the floor. Lean back slightly, keeping your back straight. Clasp your hands together and extend your arms in front of you. Twist your torso to the right and bring your clasped hands towards the ground next to your right hip. Twist back to the center and then to the left, bringing your hands towards the ground next to your left hip. Repeat for 8-12 repetitions on each side or as many as you can comfortably perform with good form."
     }
