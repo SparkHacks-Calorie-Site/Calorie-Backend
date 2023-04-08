@@ -1,0 +1,27 @@
+import os
+
+# Install required packages
+os.system('pip install fastapi')
+os.system('pip install pydantic')
+os.system('pip install pandas')
+os.system('pip install numpy')
+os.system('pip install matplotlib')
+os.system('pip install requests')
+os.system('pip install beautifulsoup4')
+os.system('pip install starlette')
+
+# Write commands to text file
+with open('install_packages.txt', 'w') as f:
+    f.write('from fastapi import FastAPI, File, UploadFile\n')
+    f.write('from pydantic import BaseModel\n')
+    f.write('import pandas as pd\n')
+    f.write('import numpy as np\n')
+    f.write('import matplotlib.pyplot as plt\n')
+    f.write('import io, time, json\n')
+    f.write('import requests\n')
+    f.write('from bs4 import BeautifulSoup\n')
+    f.write('from io import BytesIO\n')
+    f.write('from typing import Optional\n')
+    f.write('\n')
+    f.write('from starlette.responses import StreamingResponse\n')
+    f.write('import base64\n')
